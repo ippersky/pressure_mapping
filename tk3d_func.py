@@ -483,13 +483,10 @@ def run_anova(df_zone, zone, dvs):
 
     Heteroscedasticity note: we report Levene p‑values in the figure. If it fails,
     results are still produced (classical or rank ANOVA)
-    Args:
-        df_zone (df): dataframe for ANOVA analysis
-        zone (string): zone of foot
-        dvs (list[string]): metrics to perform ANOVA analysis
+   
 
     Returns:
-        anova_df (df): dataframe ready for ANOVA analysis
+        results (list)
     """
     fig, axes = plt.subplots(len(dvs), 4, figsize=(20, 12), squeeze=False)
     fig.suptitle(f"Two‑way ANOVA (Shape×Mapping) — Zone: {zone}")
@@ -598,10 +595,7 @@ def run_anova(df_zone, zone, dvs):
         )
 
         results.append(anova_tbl)
-
-
-        
-
+        results_df = pd.concat(results, ignore_index=True)
 
         # Save per‑zone outputs
         #if results:
@@ -618,6 +612,6 @@ def run_anova(df_zone, zone, dvs):
         #else:
         #    print(f"[ERROR] No ANOVA results generated for zone {zone}.")
 
-    return results
+    return results_df
 
 
